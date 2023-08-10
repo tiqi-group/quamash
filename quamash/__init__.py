@@ -1,11 +1,11 @@
 # © 2014 Mark Harviston <mark.harviston@gmail.com>
 # © 2014 Arve Knudsen <arve.knudsen@gmail.com>
 # BSD License
-"""Implementation of the PEP 3156 Event-Loop with Qt."""
+"""Implementation of the PEP 3156 Event-Loop with PyQt5."""
 
 __author__ = 'Mark Harviston <mark.harviston@gmail.com>, Arve Knudsen <arve.knudsen@gmail.com>'
-__version__ = '0.6.1'
-__url__ = 'https://github.com/harvimt/quamash'
+__version__ = '0.6.2'
+__url__ = 'https://github.com/tiqi-group/quamash-pyqt5'
 __license__ = 'BSD'
 __all__ = ['QEventLoop', 'QThreadExecutor']
 
@@ -17,38 +17,12 @@ import itertools
 from queue import Queue
 from concurrent.futures import Future
 import logging
-import importlib
+
 logger = logging.getLogger('quamash')
 
-try:
-	QtModuleName = os.environ['QUAMASH_QTIMPL']
-except KeyError:
-	QtModule = None
-else:
-	logger.info('Forcing use of {} as Qt Implementation'.format(QtModuleName))
-	QtModule = importlib.import_module(QtModuleName)
+from PyQt5 import QtCore, QtWidgets
 
-if not QtModule:
-	for QtModuleName in ('PyQt5', 'PyQt4', 'PySide'):
-		try:
-			QtModule = importlib.import_module(QtModuleName)
-		except ImportError:
-			continue
-		else:
-			break
-	else:
-		raise ImportError('No Qt implementations found')
-
-logger.info('Using Qt Implementation: {}'.format(QtModuleName))
-
-QtCore = importlib.import_module(QtModuleName + '.QtCore', package=QtModuleName)
-QtGui = importlib.import_module(QtModuleName + '.QtGui', package=QtModuleName)
-if QtModuleName == 'PyQt5':
-	from PyQt5 import QtWidgets
-	QApplication = QtWidgets.QApplication
-else:
-	QApplication = QtGui.QApplication
-
+QApplication = QtWidgets.QApplication
 
 from ._common import with_logger
 

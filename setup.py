@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import quamash
 import re
 import os.path
@@ -12,16 +12,18 @@ with open(desc_path, encoding='utf8') as desc_file:
 	long_description = desc_file.read()
 
 setup(
-	name='Quamash',
+	name='Quamash PyQt5',
 	version=quamash.__version__,
 	url=quamash.__url__,
 	author=', '.join(authors),
 	author_email=', '.join(emails),
-	packages=['quamash'],
+	packages=find_packages(),
+	install_requires=['PyQt5>=5'],
+	python_requires='>=3.5, <=3.10',
 	license=quamash.__license__,
-	description=quamash.__doc__,
+	description="Optimized fork of Quamash for seamless PEP 3156 Event-Loop integration with PyQt5.",
 	long_description=long_description,
-	keywords=['Qt', 'asyncio'],
+	keywords=['Qt', 'asyncio', 'PyQt5'],
 	classifiers=[
 		'Development Status :: 3 - Alpha',
 		'License :: OSI Approved :: BSD License',
@@ -29,13 +31,11 @@ setup(
 		'Operating System :: Microsoft :: Windows',
 		'Operating System :: MacOS :: MacOS X',
 		'Operating System :: POSIX',
-		'Programming Language :: Python :: 3.3',
-		'Programming Language :: Python :: 3.4',
 		'Programming Language :: Python :: 3.5',
+		'Programming Language :: Python :: 3.10',
 		'Programming Language :: Python :: 3 :: Only',
 		'Environment :: X11 Applications :: Qt',
 	],
-	# FIXME depends on PyQt4, PyQt5 or PySide, but cannot put that in a setup.py
 	extras_require={
 		'test': ['pytest'],
 	},

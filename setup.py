@@ -38,7 +38,7 @@ with open(desc_path, encoding='utf8') as desc_file:
 	long_description = desc_file.read()
 
 setup(
-	name='Quamash PyQt5',
+	name='Quamash',
 	version=version,
 	url=url,
 	author=', '.join(authors),

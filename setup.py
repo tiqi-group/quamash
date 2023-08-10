@@ -45,7 +45,7 @@ setup(
 	author_email=', '.join(emails),
 	packages=find_packages(),
 	install_requires=['PyQt5>=5'],
-	python_requires='>=3.5, <=3.10',
+	python_requires='>=3.5, <3.11',
 	license=license_name,
 	description="Optimized fork of Quamash for seamless PEP 3156 Event-Loop integration with PyQt5.",
 	long_description=long_description,
